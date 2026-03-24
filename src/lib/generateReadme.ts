@@ -15,7 +15,11 @@ export async function generateReadme(
     writer: Writer        // ✅ replace Express `res` with `writer`
 ) {
     try {
-        const { Content, repo } = await getRepoFileStructure(url, branch, accessToken)
+        const repoData = await getRepoFileStructure(url, branch, accessToken)
+        if (!repoData) {
+            throw new Error("Failed to fetch repository structure.")
+        }
+        const { Content, repo } = repoData
         const FullContent = appendContent(Content)
         const data = await main(FullContent)
 

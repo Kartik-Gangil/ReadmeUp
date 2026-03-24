@@ -279,7 +279,7 @@ const Files = {
 
 // file parser
 
-const fileParsers = {
+const fileParsers: Record<string, (content: any, path: any) => any> = {
 
     "package.json": (content, path) => {
         const pkg = JSON.parse(content);
@@ -307,7 +307,7 @@ const fileParsers = {
         type: "python-dependencies",
         dependencies: content
             .split("\n")
-            .map(d => d.trim())
+            .map((d: string) => d.trim())
             .filter(Boolean)
     }),
 
@@ -316,7 +316,7 @@ const fileParsers = {
         type: "python-dependencies",
         dependencies: content
             .split("\n")
-            .map(d => d.trim())
+            .map((d: string) => d.trim())
             .filter(Boolean)
     }),
 
@@ -325,7 +325,7 @@ const fileParsers = {
         type: "go-module",
         dependencies: content
             .split("\n")
-            .filter(line => line.startsWith("require"))
+            .filter((line: string) => line.startsWith("require"))
     }),
 
     "composer.json": (content, path) => {
@@ -380,12 +380,12 @@ async function getFile(owner: string, repo: string, path: string, oK: any) {
     }
 }
 
-function optimizeFiles(files) {
+function optimizeFiles(files: any[]) {
 
-    return files.map(file => {
+    return files.map((file: any) => {
 
         const { path, content } = file.value || file;
-        const base = path.split("/").pop();
+        const base = typeof path === 'string' ? path.split("/").pop() || "" : String(path || "");
 
         try {
 
@@ -421,7 +421,9 @@ function optimizeFiles(files) {
 //  fetch the highest contribute language from the git repositry
 async function getRepoLanguageList(url: string, oK: any) {
     try {
-        const { owner, repo } = parseURL(url);
+        const parsed = parseURL(url);
+        if (!parsed) throw new Error("Invalid GitHub URL");
+        const { owner, repo } = parsed;
         const response = await oK.repos.listLanguages({
             owner,
             repo,
@@ -440,7 +442,9 @@ async function getRepoLanguageList(url: string, oK: any) {
 // this function fetch the content from the git repositry file
 async function getRepoContent(url: string, paths: string[], oK: any) {
     try {
-        const { owner, repo } = parseURL(url);
+        const parsed = parseURL(url);
+        if (!parsed) throw new Error("Invalid GitHub URL");
+        const { owner, repo } = parsed;
         let Content = "";
         const file = await Promise.allSettled(
             paths.map(async (path) => {
@@ -498,7 +502,7 @@ export async function getRepoFileStructure(url: string, branch: string, accessTo
             return { Content: "", repo };
         }
 
-        const allowedFiles = new Set(Files[normalizedLang]);
+        const allowedFiles = new Set(Files[normalizedLang as keyof typeof Files]);
 
         // Filter relevant files
         for (const item of treeData.data.tree) {
