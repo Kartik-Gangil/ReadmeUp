@@ -15,7 +15,7 @@ function Main() {
     const [url, setUrl] = useState('')
     const [loader, setLoader] = useState(false)
     const [Source, setSource] = useState('')
-    const [Branches, setBranches] = useState([])
+    const [Branches, setBranches] = useState<string[]>([])
     const [Branch, setBranch] = useState()
     // const [repoName, setRepoName] = useState(localStorage.getItem('repo') || '');
     const leftAdRef = useRef(null);
@@ -66,7 +66,7 @@ function Main() {
     }, [url])
 
 
-    async function parseURL(url:any) {
+    async function parseURL(url: any) {
         try {
             const regex = /github\.com\/([^\/]+)\/([^\/]+)(?:\.git)?/;
             const match = url.match(regex);
@@ -76,7 +76,7 @@ function Main() {
                 return { owner, repo };
             }
         }
-        catch (err:any) {
+        catch (err: any) {
             console.error("Error parsing URL:", err.message);
         }
     }
@@ -90,7 +90,7 @@ function Main() {
     async function fetchBranches() {
         const { owner, repo } = await parseURL(url) || {};
         const response = await axios.get(`https://api.github.com/repos/${owner}/${repo}/branches`)
-        response.data.map((branch) => {
+        response.data.map((branch: any) => {
             setBranches((prevBranches) => [...prevBranches, branch.name])
         })
         // setBranches(response.data)
