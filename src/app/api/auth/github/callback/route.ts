@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 import User from "@/lib/user";
 import { connectToServer } from "@/lib/connection";
 
-const redirectURL = process.env.redirectURL || 'http://localhost:5173/main';
+const redirectURL = process.env.redirectURL! || 'http://localhost:5173/main';
 
 export async function GET(req: NextRequest) {
     connectToServer()
@@ -13,8 +13,8 @@ export async function GET(req: NextRequest) {
     const code = searchParams.get('code');
 
     const response = await axios.post("https://github.com/login/oauth/access_token", {
-        client_id: process.env.GITHUB_CLIENT_ID,
-        client_secret: process.env.GITHUB_CLIENT_SECRET,
+        client_id: process.env.GITHUB_CLIENT_ID!,
+        client_secret: process.env.GITHUB_CLIENT_SECRET!,
         code: code
     }, {
         headers: {

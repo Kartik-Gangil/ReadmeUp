@@ -2,7 +2,7 @@ import { GoogleGenAI } from "@google/genai";
 
 
 
-const api = new GoogleGenAI({ apiKey: process.env.GOOGLE_API_KEY });
+const api = new GoogleGenAI({ apiKey: process.env.GOOGLE_API_KEY! });
 
 
 export async function main(FullContent: any) {
