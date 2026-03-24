@@ -9,9 +9,12 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@google/genai": "^0.9.0",
     "@lottiefiles/react-lottie-player": "^3.6.0",
+    "@octokit/rest": "^21.1.1",
     "@uiw/react-markdown-preview": "^5.1.4",
     "axios": "^1.8.4",
+    "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.3.1",
     "next": "16.2.1",
     "react": "19.2.4",
@@ -20,13 +23,11 @@
     "react-router-dom": "^7.6.0",
     "react-toastify": "^11.0.5",
     "styled-components": "^6.1.17",
-    "tailwindcss": "^4.1.4",
-    "jsonwebtoken": "^9.0.3",
-    "@google/genai": "^0.9.0",
-    "@octokit/rest": "^21.1.1"
+    "tailwindcss": "^4.1.4"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
