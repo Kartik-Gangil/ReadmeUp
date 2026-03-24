@@ -1,10 +1,10 @@
 import { useEffect, useRef } from "react";
 
 export default function CursorGradient() {
-    const dotRef = useRef(null);
+    const dotRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
-        const moveDot = (e) => {
+        const moveDot = (e:any) => {
             if (dotRef.current) {
                 dotRef.current.style.left = `${e.clientX}px`;
                 dotRef.current.style.top = `${e.clientY}px`;

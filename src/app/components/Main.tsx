@@ -16,7 +16,7 @@ function Main() {
     const [loader, setLoader] = useState(false)
     const [Source, setSource] = useState('')
     const [Branches, setBranches] = useState<string[]>([])
-    const [Branch, setBranch] = useState()
+    const [Branch, setBranch] = useState<string>()
     // const [repoName, setRepoName] = useState(localStorage.getItem('repo') || '');
     const leftAdRef = useRef(null);
     const rightAdRef = useRef(null);
@@ -282,7 +282,7 @@ function Main() {
                         />
 
                         <select
-                            onClick={(e) => setBranch(e.target.value)}
+                            onClick={(e) => setBranch((e.target as HTMLSelectElement).value)}
                             className="px-3 py-2 border rounded-md w-full focus:outline-blue-500 focus:ring-2 focus:ring-blue-500 transition"
                         >
 
