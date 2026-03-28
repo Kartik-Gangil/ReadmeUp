@@ -92,10 +92,17 @@ Contributions are welcome! Please follow these steps:
 4.  Commit your changes (`git commit -am 'Add some feature'`).
 5.  Push to the branch (`git push origin feature/your-feature`).
 6.  Open a Pull Request.
+7. for better understanding read [CONTRIBUTION](CONTRIBUTION.md)
 
-## License
+## 📜 License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+This project is licensed under a Custom Non-Commercial License.
+
+- Free for personal use  
+- Commercial use is strictly prohibited  
+- Selling or sublicensing is not allowed  
+- 🚫 This project is NOT open-source for commercial use.
+See the [LICENSE](LICENSE) file for full details.
 
 ## Contact
 
